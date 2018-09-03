@@ -10,7 +10,7 @@
     "navigationBarBackgroundColor": "#6195FF",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "看风了风",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#e4e4e4",
     "backgroundTextStyle": "dark",
     "enablePullDownRefresh": true,
     "onReachBottom": true

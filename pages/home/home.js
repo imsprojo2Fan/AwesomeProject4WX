@@ -176,7 +176,7 @@ Page({
   onPageScroll: function (e) {
     
     var top = parseInt(e.scrollTop)
-    console.log(top)
+    //console.log(top)
     if (top > 2000 && isInit4series){
       isInit4series = false
       this.requestData(2);

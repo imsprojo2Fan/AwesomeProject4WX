@@ -1,6 +1,4 @@
 /* home.wxss */
-@import "/weui/weui.wxss";
-
 page {
   background-color: #F8F8F8;
   height: 100%;
