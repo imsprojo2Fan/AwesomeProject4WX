@@ -1,0 +1,82 @@
+<view class="container">
+  <view class="page-body">
+    <view style='margin-top:-5px' class="page-section page-section-spacing swiper">
+      <swiper
+        indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+        <block wx:for="{{imgUrls}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" mode='widthFix' style='width:100%;' />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+    <view class='head' >
+      <view class='title'>电影</view>
+      <view class='line'></view>
+      <view class="" wx:for="{{list4movie}}" wx:key=""> 
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}'>
+            <view >
+                <image style='width:60%;' src="{{item.imgSrc2}}"></image>
+            </view>
+            <view >
+                <view class='film-title'>{{item.name}}</view>
+            </view>
+        </view>
+      </view>
+
+    </view>
+
+    <view id='seriesHeader' class='head'>
+      <view class='title'>电视剧</view>
+      <view class='line'></view>
+      <view class="" wx:for="{{list4series}}" wx:key=""> 
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}'>
+            <view >
+                <image style='width:55%;' src="{{item.imgSrc2}}"></image>
+            </view>
+            <view >
+                <view class='film-title'>{{item.name}}</view>
+            </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='head'>
+      <view class='title'>综艺</view>
+      <view class='line'></view>
+      <view class="" wx:for="{{list4varity}}" wx:key=""> 
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}'>
+            <view >
+                <image style='width:55%;' src="{{item.imgSrc2}}"></image>
+            </view>
+            <view >
+                <view class='film-title'>{{item.name}}</view>
+            </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='head'>
+      <view class='title'>动漫</view>
+      <view class='line'></view>
+      <view class="" wx:for="{{list4animate}}" wx:key=""> 
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}'>
+            <view >
+                <image style='width:55%;' src="{{item.imgSrc2}}"></image>
+            </view>
+            <view >
+                <view class='film-title'>{{item.name}}</view>
+            </view>
+        </view>
+      </view>
+    </view>
+
+    <view hidden='{{hidden}}' style='padding:15px 0;color:#e4e4e4;widh:100%;text-align:center;font-size:10px;'>
+      前往分类可查看更多
+    </view>
+
+  </view>
+</view>
+
