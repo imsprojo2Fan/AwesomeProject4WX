@@ -1,3 +1,15 @@
+
+<view id="loading" class="loading-wrap" hidden='{{loadingHidden}}'>
+  <view class="loader">
+    <view class="la-fire la-3x" style='color:#6195FF'>
+      <view></view>
+      <view></view>
+      <view></view>
+    </view>
+    <view class="loaderTxt">加载数据中...</view>
+  </view>
+</view>
+
 <view class="container">
   <view class="page-body">
     <view style='margin-top:-5px' class="page-section page-section-spacing swiper">

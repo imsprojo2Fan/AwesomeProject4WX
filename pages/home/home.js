@@ -34,7 +34,8 @@ Page({
     list4series:[],
     list4varity:[],
     list4animate:[],
-    hidden:true
+    hidden:true,
+    loadingHidden: false
   },
 
   /**
@@ -80,7 +81,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showToast({
-      title: '你想看些什么呢？',
+      title: '想看些什么呢？',
       icon: 'none',
       duration: 1000
     })
@@ -195,11 +196,6 @@ Page({
 
 
   requestData:function(dataType){
-    wx.showLoading({
-      title: '数据加载中',
-      icon: 'loading'
-    })
-
     wx.request({
       url: formalUrl,
       data: {
@@ -237,7 +233,9 @@ Page({
 
       },
       complete: function () {
-        wx.hideLoading();
+        that.setData({
+          loadingHidden:true
+        })
       }
     })
   }

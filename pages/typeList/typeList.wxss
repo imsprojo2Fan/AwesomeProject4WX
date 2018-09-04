@@ -1,4 +1,5 @@
 /* typeList.wxss */
+@import "../../comm/style/loading.wxss";
 scroll-view{
   height: 100%;
   width: 100%;
@@ -38,7 +39,7 @@ scroll-view{
   width: 35px;
   height: 35px;
   position: fixed;
-  right: 10px;
+  right: 12px;
   bottom: 8vh;
   z-index: 1;
   background-color: #6195FF;

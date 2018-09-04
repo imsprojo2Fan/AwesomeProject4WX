@@ -13,6 +13,10 @@ var totalPage = 0
 var gData = []
 var lastId = 0
 var height = wx.getSystemInfoSync().windowHeight
+
+let t1 = 0;
+let t2 = 0;
+let timer = null; // 定时器
 Page({
 
   /**
@@ -23,7 +27,9 @@ Page({
     //初始化数据list
     list: [],  //将list的数据传到前台wxml页面中
     hidden: true,
-    isHide:true
+    isHide:true,
+    loadingHidden: false,
+    tabScrollTop: 0
   },
 
   /**
@@ -135,11 +141,6 @@ Page({
 
   },
   requestData: function (dataType,pageNow) {
-    wx.showLoading({
-      title: '数据加载中...',
-      icon: 'loading'
-    })
-
     wx.request({
       url: formalUrl,
       data: {
@@ -181,12 +182,14 @@ Page({
 
       },
       complete: function () {
-        wx.hideLoading();
+        that.setData({
+          loadingHidden: true
+        })
       }
     })
   },
   onPageScroll: function (e) {
-    
+    console.log(e);
     if (e.scrollTop > height) {
       this.setData({
         isHide: false
@@ -200,6 +203,8 @@ Page({
     if (pageNow > totalPage) {
       return
     }
+
+    setTimeout(function(){},1000)
     pageNow++
     that.requestData(gType, pageNow);
   },
