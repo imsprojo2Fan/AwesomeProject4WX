@@ -1,5 +1,5 @@
 <!--typeList.wxml-->
-<view id="loading" class="loading-wrap" hidden='{{loadingHidden}}'>
+<view id="loading" class="loading-wrap" style='display:{{isDisplay}}'>
   <view class="loader">
     <view class="la-fire la-3x" style='color:#6195FF'>
       <view></view>
@@ -9,9 +9,9 @@
     <view class="loaderTxt">加载数据中...</view>
   </view>
 </view>
-<scroll-view scroll-y scroll-with-animation='true' scroll-top='{{ topNum }}' class='item'>
+<view class='item'>
   <view class="" wx:for="{{list}}" wx:key=""> 
-    <view class='filmItem' bindtap='toDetail' id='{{item.id}}'>
+    <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}">
       <view >
         <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
       </view>
@@ -20,7 +20,7 @@
       </view>
     </view>
   </view>
-</scroll-view>
+</view>
 <view hidden='{{hidden}}' style='padding:15px 0;color:#e4e4e4;widh:100%;text-align:center;font-size:10px;'>
     {{tip}}
 </view>

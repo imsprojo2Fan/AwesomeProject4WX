@@ -4,7 +4,8 @@
     "pages/home/home",
     "pages/search/search",
     "pages/mine/mine",
-    "pages/typeList/typeList"
+    "pages/typeList/typeList",
+    "pages/detail/detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#6195FF",

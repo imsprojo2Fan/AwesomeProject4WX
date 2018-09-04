@@ -1,9 +1,9 @@
 // typeList.js
 var app
+var that
 var testUrl = 'http://localhost:7080/wx/resource/list'
 var formalUrl = 'https://wx.zooori.cn/wx/resource/list'
 var refreshUrl = 'https://wx.zooori.cn/wx/resource/list4refresh'
-var that
 var isInit4series = true
 var isInit4varity = true
 var isInit4animate = true
@@ -29,7 +29,8 @@ Page({
     hidden: true,
     isHide:true,
     loadingHidden: false,
-    tabScrollTop: 0
+    tabScrollTop: 0,
+    isDisplay:'block'
   },
 
   /**
@@ -44,7 +45,6 @@ Page({
     //请求电影列表
     console.log(options.type)
     gType = options.type
-    console.log(gType)
     var title
     if (gType==1){
       title = "电影列表"
@@ -125,10 +125,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    return
     if(pageNow>totalPage){
       return
     }
+    this.setData({
+      isDisplay: 'block'
+    })
     console.log(totalPage)
     pageNow++
     this.requestData(gType,pageNow);
@@ -164,7 +166,7 @@ Page({
             hidden: false
           })
           that.setData({
-            tip: "没有更多数据了"
+            tip: "没有更多了"
           })
         }
         if(pageNow==1){
@@ -183,13 +185,13 @@ Page({
       },
       complete: function () {
         that.setData({
-          loadingHidden: true
+          isDisplay: 'none'
         })
       }
     })
   },
   onPageScroll: function (e) {
-    console.log(e);
+    //console.log(e);
     if (e.scrollTop > height) {
       this.setData({
         isHide: false
@@ -203,10 +205,8 @@ Page({
     if (pageNow > totalPage) {
       return
     }
-
-    setTimeout(function(){},1000)
-    pageNow++
-    that.requestData(gType, pageNow);
+    //pageNow++
+    //that.requestData(gType, pageNow);
   },
   goTop: function (e) {  // 一键回到顶部
     if (wx.pageScrollTo) {
@@ -222,6 +222,17 @@ Page({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+  },
+  toDetail:function(e){
+    console.log(e)
+    var id = e.currentTarget.id
+    console.log(id)
+    var dType = e.currentTarget.dataset.type
+    console.log(dType)
+    //跳转页面
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id+"&type="+dType
+    })
   }
  
 })

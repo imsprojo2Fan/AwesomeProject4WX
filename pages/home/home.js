@@ -92,7 +92,7 @@ Page({
    */
   onReachBottom: function () {
     reBottom++
-    /*if (reBottom==1&&isInit4series) {
+    if (reBottom==1&&isInit4series) {
       isInit4series = false
       this.requestData(2);
     }
@@ -105,7 +105,12 @@ Page({
     if (reBottom==3&&isInit4animate) {
       isInit4animate = false
       this.requestData(4);
-    }*/
+    }
+    if(reBottom<4){
+      that.setData({
+        loadingHidden: false
+      })
+    }
   },
 
   /**
@@ -175,7 +180,7 @@ Page({
   },
 
   onPageScroll: function (e) {
-    
+    return
     var top = parseInt(e.scrollTop)
     //console.log(top)
     if (top > 2000 && isInit4series){

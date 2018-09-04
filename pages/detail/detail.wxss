@@ -1,0 +1,2 @@
+/* pages/detail.wxss */
+@import "../../comm/style/loading.wxss";
