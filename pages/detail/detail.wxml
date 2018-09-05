@@ -9,19 +9,40 @@
     <view class="loaderTxt">加载数据中...</view>
   </view>
 </view>
-<view style='position:absolute;z-index:99;top:-27px;left:15px;'>
-  <image mode='aspectFit' style='width:95px;'  src='../../dist/images/play.png'></image>
-</view>
-<view >
-  <view style=''>
-    <image mode='aspectFit' style='float:left;margin-left:8px;width:115px;height:165px;margin-top:8px' src="{{imgSrc}}"></image>
+<view class='wrap'>
+
+  <view hidden='{{isOn}}' style='position:absolute;z-index:99;top:58px;left:26px;'>
+    <image mode='aspectFit' style='width:95px;height:95px'  src='../../dist/images/play.png'></image>
   </view>
-  <view style='margin-left:130px;font-size:23px;font-weight:bold;margin-top:3px'>{{name}}</view>
-  <view style='margin-left:130px;;font-size:13px;font-weight:normal;color:#10161A'>导演:{{director}}</view>
-  <view style='margin-left:130px;;font-size:13px;font-weight:normal;color:#10161A'>主演:{{actor}}</view>
-  <view style='width:100%;height:28px;background:#6195FF;opacity:0.75;margin-left:51px'></view>
-  <view style='margin-left:130px;;font-size:13px;font-weight:normal;color:#10161A'>发行日期:{{publish}}</view>
-  <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>播放时长:{{length}}</view>
-  <view style='font-size:13px;font-weight:normal;color:#868F9B;color:#10161A;padding-left:130px'>剧情简介:</view>
-  <view style='margin-left:8px;font-size:13px;font-weight:normal;color:#868F9B;padding-left:0px;padding-right:8px;text-indent:7px;'>{{description}}</view>
+  <view >
+    <view style=''>
+      <image mode='aspectFit' style='float:left;margin-left:0px;width:115px;height:165px;margin-top:8px' src="{{imgSrc}}"></image>
+    </view>
+    <view style='margin-left:130px;font-size:23px;font-weight:bold;margin-top:3px'>{{name}}</view>
+    <view style='margin-left:130px;;font-size:13px;font-weight:normal;color:#10161A'>导演：{{director}}</view>
+    <view style='margin-left:130px;;font-size:13px;font-weight:normal;color:#10161A'>主演：{{actor}}</view>
+    <view style='width:100%;height:28px;background:#6195FF;opacity:0.75;color:#fff;font-size:15px;line-height:28px;text-indent:15px;'>看风了风</view>
+    <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>发行日期：{{publish}}</view>
+    <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>播放时长：{{length}}</view>
+    <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>电影分类：{{dType}}</view>
+    <view style='font-size:13px;font-weight:normal;color:#868F9B;color:#10161A;padding-left:130px'>剧情简介：</view>
+    <view style='margin-left:8px;font-size:13px;font-weight:normal;color:#868F9B;padding-left:0px;padding-right:8px;text-indent:15px;'>{{description}}</view>
+  </view>
+
 </view>
+
+<view class='wrap' hidden='{{isOn}}'>
+  <view style='margin:12px 8px;text-align:center'>
+    <view class='tag' style='margin-right:8px;'><text style='margin-right:5px;color:#6195FF;' class='fa fa-play-circle'/>在线观看</view>
+    <view class='tag' style='margin-left: 8px'><text style='margin-right:5px;color:#6195FF;' class='fa fa-cloud-download'/>百度网盘</view>
+  </view>
+</view>
+
+<view class='wrap' hidden='{{isSeriesOn}}' >
+  <view style='margin:8px;'>
+     <view class="series" wx:for="{{series}}" wx:key="i" bindtap='toPlay' id='{{item.id}}' data-sid="{{item.sid}}" data-type="{{item.phoneSrc}}">{{item.sequence}}</view>
+  </view>
+</view>
+
+<view style='height:15px;'></view>
+

@@ -1,2 +1,29 @@
 /* pages/detail.wxss */
 @import "../../comm/style/loading.wxss";
+.wrap{
+  margin:10px;border:1px solid #eee;
+}
+
+.tag{
+    display: inline-block;
+    padding: 6px 13px;
+    font-size: 14px;
+    margin: 2px 0px;
+    background: #F4F4F4;
+    color: #10161A;
+     border-radius: 3px;
+}
+
+.series{
+    width:25px;
+    height:25px; 
+    display: inline-block;
+    text-align: center;
+    padding: 6px 8px;
+    font-size: 14px;
+    margin: 2px 0px;
+    background: #F4F4F4;
+    color: #10161A;
+    border-radius: 0px;
+    margin-right: 5px;
+}

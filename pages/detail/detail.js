@@ -1,6 +1,7 @@
 // pages/detail.js
 var app
 var that
+var testUrl = 'http://localhost:7080/wx/resource/list4item'
 var formalUrl = 'https://wx.zooori.cn/wx/resource/list4item'
 Page({
 
@@ -14,7 +15,11 @@ Page({
     actor:"",
     publish:"",
     length:"",
-    description:""
+    description:"",
+    dType:"",
+    isOn:true,
+    isSeriesOn:true,
+    series:[]
   },
 
   /**
@@ -88,32 +93,58 @@ Page({
       success: function (res) {
         var data = res.data.data
         console.log(data)
-        if(data.length==1){//单剧集处理
+        //单剧集处理
         var obj = data[0]
           /*设置title*/
           wx.setNavigationBarTitle({
             title: obj.name
           })
+        var director = obj.director;
+        if(director.length>11){
+          director = director.substring(0,11)+"..."
+        }
           var name = obj.name
           if(name.length>10){
             name = name.substring(0,10)+"..."
           }
           var actor = obj.actor
           if(actor.length>13){
-            actor = actor.substring(0,20)+"..."
+            actor = actor.substring(0,15)+"..."
           }
           var description = obj.description.trim()
           description = description.replace(/[\r\n]/g, "");
+          var detailType = obj.detailType;
+          if(detailType.length>10){
+            detailType.substring(0,10)+"..."
+          }
+          var isOn = obj.isOn;
+          var flag = true;
+          if(isOn==1){
+            flag = false
+          }
           that.setData({
             imgSrc:obj.imgSrc2,
             name:name,
-            director:obj.director,
+            director:director,
             actor:actor,
             publish:obj.publish,
             length:obj.length,
-            description:description
+            description:description,
+            dType:detailType,
+            isOn:flag
           })
-
+        if (data.length>1){//多剧集处理
+        for(var i=0;i<data.length;i++){
+          var sequence = data[i].sequence
+          if (sequence<10){
+            sequence = "0" + sequence;
+          }
+          data[i].sequence = sequence;
+        }
+          that.setData({
+            isSeriesOn:false,
+            series:data
+          })
         }
       },
       fail: function () {
