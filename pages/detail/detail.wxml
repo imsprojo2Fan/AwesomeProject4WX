@@ -35,7 +35,7 @@
   <view style='margin:12px 8px;text-align:center'>
     <view class='tag' style='margin-right:0px;' bindtap='toPlay' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-play-circle'/>在线观看</view>
     <view class='tag' style='margin-left: 8px;' bindtap='toBdCloud' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-cloud-download'/>百度网盘</view>
-    <view class='tag' style='margin-left: 8px' bindtap='toResponse' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-bug'/>反馈问题</view>
+    <view  class='tag' style='margin-left: 8px' bindtap='toResponse' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-bug'/>反馈问题</view>
   </view>
 </view>
 
@@ -48,11 +48,11 @@
 <view class='wrap padding'>
   <view style='font-size:18px;color:#10161A;font-weight:bold;'>写点观感</view>
   <view style='height:3px;width:35px;background:#6195FF'></view>
-  <input id="nickName" maxlength="20" class="input" type="text" placeholder="昵称"/>
-  <input id="email" maxlength="30" class="input" type="text" placeholder="邮箱"/>
-  <textarea hidden='{{isHide}}' id="content" placeholder="一些想法"></textarea>
+  <input data-type="nickName" value="{{val}}" maxlength="20" bindinput="inputVal" class="input" type="text" placeholder="昵称"/>
+  <input data-type="email" value="{{val}}" maxlength="30" class="input" bindinput="inputVal" type="text" placeholder="邮箱"/>
+  <textarea hidden='{{isHide}}' value="{{val}}" data-type="content" bindinput="inputVal" placeholder="一些想法"></textarea>
   <view style='width:100%;text-align:center;'>
-    <view class='tag' style='margin:15px auto;padding-left:25px;padding-right:25px;' hover-class='shadow'>提交</view>
+    <view class='tag' style='margin:15px auto;padding-left:25px;padding-right:25px;' bindtap='submit' hover-class='shadow'>提交</view>
   </view>
   
 </view>
@@ -63,20 +63,21 @@
 
   <view style='margin-top:5px;border:0px solid #eee;' class=''>
 
-    <view style='border:1px solid #eee;padding:3px;margin-top:5px;'>
+    <view wx:for="{{commentArr}}"  wx:key="i2" style='border:1px solid #eee;padding:3px;margin-top:5px;'>
       <view >
-      <image mode='aspectFit' style='float:left;width:48px;height:48px;' src='../../dist/images/avatar.png'/>
+        <image mode='aspectFit' style='float:left;width:48px;height:48px;' src='../../dist/images/avatar.png'/>
+      </view>
+      <view style='height:30px;line-height:30px;'>
+        <text style='color:#10161A;font-size:14px;margin-left:3px'>{{item.nickName}}</text>
+        <text style='margin-left:20px;color:#868F9B;font-size:12px;'>{{item.created}}</text>
+      </view>
+      <view style='color:#868F9B;font-size:12px;text-indent:3px;'>
+        {{item.content}}
+      </view>
     </view>
-    <view style='height:30px;line-height:30px;'>
-      <text style='color:#10161A;font-size:14px;margin-left:3px'>看风了风</text>
-      <text style='margin-left:20px;color:#868F9B;font-size:12px;'>08-22 15:31</text>
-    </view>
-    <view style='color:#868F9B;font-size:12px;text-indent:3px;'>
-        小豆子一脸紧张的说“我..我本是男儿郎”“错了!” 师傅的鞭子打的不仅仅是皮肉。“我叫你错! 我叫你错!” 身边的少年一脸凶狠拿起烟袋锅子惩罚性的捅向小豆子的嗓子，虽然手下不留情，却不难看出他眼中流露出的心疼和难过。 血顺着小豆子的嘴角留下，他的眼底确是一片清明，仿佛突然认清了什么。“我本是女娇娥，又不是男儿郎...” 那时的他只想跟师哥唱一辈子戏。
-    文革动荡后，时隔二十二年未同台的蝶衣小楼再次着装霸王虞姬回到戏院。小楼起头“小尼姑年方二八，正青春被师傅削去了头发。”蝶衣接“我本是女娇娥，又不是男儿郎。” 小楼笑了“错了!你本是男儿郎!” 蝶衣仿佛如被雷劈到了一般，喃喃到“我本是男儿郎...” 这才明白，原来终其一生，他都错了，错的离谱，错的笑话。只有作为虞姬自刎于剑下，才是一切的终结..
-    </view>
-    </view>
+    <view hidden='{{hideTip}}' style='font-size:13px;color:#868F9B'>暂无评论</view>
 
+    <!--
     <view style='border:1px solid #eee;padding:3px;margin-top:5px;'>
       <view >
       <image mode='aspectFit' style='float:left;width:48px;height:48px;' src='../../dist/images/avatar.png'/>
@@ -90,24 +91,12 @@
     文革动荡后，时隔二十二年未同台的蝶衣小楼再次着装霸王虞姬回到戏院。小楼起头“小尼姑年方二八，正青春被师傅削去了头发。”蝶衣接“我本是女娇娥，又不是男儿郎。” 小楼笑了“错了!你本是男儿郎!” 蝶衣仿佛如被雷劈到了一般，喃喃到“我本是男儿郎...” 这才明白，原来终其一生，他都错了，错的离谱，错的笑话。只有作为虞姬自刎于剑下，才是一切的终结..
     </view>
     </view>
+    -->
 
-    <view style='border:1px solid #eee;padding:3px;margin-top:5px;'>
-      <view >
-      <image mode='aspectFit' style='float:left;width:48px;height:48px;' src='../../dist/images/avatar.png'/>
-    </view>
-    <view style='height:30px;line-height:30px;'>
-      <text style='color:#10161A;font-size:14px;margin-left:3px'>看风了风</text>
-      <text style='margin-left:20px;color:#868F9B;font-size:12px;'>08-22 15:31</text>
-    </view>
-    <view style='color:#868F9B;font-size:12px;text-indent:3px;'>
-        小豆子一脸紧张的说“我..我本是男儿郎”“错了!” 师傅的鞭子打的不仅仅是皮肉。“我叫你错! 我叫你错!” 身边的少年一脸凶狠拿起烟袋锅子惩罚性的捅向小豆子的嗓子，虽然手下不留情，却不难看出他眼中流露出的心疼和难过。 血顺着小豆子的嘴角留下，他的眼底确是一片清明，仿佛突然认清了什么。“我本是女娇娥，又不是男儿郎...” 那时的他只想跟师哥唱一辈子戏。
-    文革动荡后，时隔二十二年未同台的蝶衣小楼再次着装霸王虞姬回到戏院。小楼起头“小尼姑年方二八，正青春被师傅削去了头发。”蝶衣接“我本是女娇娥，又不是男儿郎。” 小楼笑了“错了!你本是男儿郎!” 蝶衣仿佛如被雷劈到了一般，喃喃到“我本是男儿郎...” 这才明白，原来终其一生，他都错了，错的离谱，错的笑话。只有作为虞姬自刎于剑下，才是一切的终结..
-    </view>
-    </view>
 
     
   </view>
 </view>
 
-<view style='height:15px;'></view>
+<view style='height:25px;'></view>
 

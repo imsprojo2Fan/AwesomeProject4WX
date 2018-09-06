@@ -54,9 +54,10 @@
   opacity: 0.75;
 }
 input{
-    height: 30px;
-    width: 90%;
+    height: 40px;
+    width: 92%;
     border: none;
+    border-radius: 3px;
     font-size: 13px;
     background: #F4F4F4;
     border-bottom: 2px solid #EEE;
@@ -69,10 +70,11 @@ input{
 }
 textarea{
     padding: 5px 10px;
+    border-radius: 3px;
     min-height: 100px;
     resize: vertical;
     height: 40px;
-    width: 90%;
+    width: 92%;
     border: none;
     margin-top: 10px;
     font-size: 13px;
