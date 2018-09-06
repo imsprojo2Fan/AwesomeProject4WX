@@ -49,3 +49,8 @@ scroll-view{
   line-height: 35px;
 }
 
+.shadow{
+  background: #999999;
+  opacity: 0.75;
+}
+

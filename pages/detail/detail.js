@@ -10,6 +10,7 @@ Page({
    */
   data: {
     isDisplay: 'block',
+    playImg:"../../dist/images/play.png",
     imgSrc:'',
     director:"",
     actor:"",
@@ -19,7 +20,10 @@ Page({
     dType:"",
     isOn:true,
     isSeriesOn:true,
-    series:[]
+    series:[],
+    blue:"#6195FF",
+    isHide:true,
+    comments:0
   },
 
   /**
@@ -152,9 +156,59 @@ Page({
       },
       complete: function () {
         that.setData({
-          isDisplay: 'none'
+          isDisplay: 'none',
+          isHide:false
         })
       }
     })
-  }
+  },
+  changeImg:function(e){
+    console.log(e);
+    var dType = e.type;
+    if(dType=="touchstart"){
+      that.setData({
+        playImg:"../../dist/images/play_active.png"
+      })
+    }else{
+      that.setData({
+        playImg: "../../dist/images/play.png"
+      })
+    }
+  },
+  toPlay:function(e){
+    var dType = e.type;
+    if (dType == "touchstart") {
+      that.setData({
+        blue: "#fff"
+      })
+    } else {
+      that.setData({
+        blue: "#6195FF"
+      })
+    }
+  },
+  toBdCloud: function (e) {
+    var dType = e.type;
+    if (dType == "touchstart") {
+      that.setData({
+        blue:"#fff"
+      })
+    } else {
+      that.setData({
+        blue: "#6195FF"
+      })
+    }
+  },
+  toResponse: function (e) {
+    var dType = e.type;
+    if (dType == "touchstart") {
+      that.setData({
+        blue: "#fff"
+      })
+    } else {
+      that.setData({
+        blue: "#6195FF"
+      })
+    }
+  },
 })

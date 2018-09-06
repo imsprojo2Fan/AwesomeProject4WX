@@ -144,3 +144,8 @@ button:last-child{
   overflow: hidden;
   border:0px solid #6195FF;
 }
+
+.shadow{
+  background: #999999;
+  opacity: 0.75;
+}

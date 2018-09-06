@@ -11,7 +11,7 @@
 </view>
 <view class='item'>
   <view class="" wx:for="{{list}}" wx:key=""> 
-    <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}">
+    <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}" hover-class='shadow'>
       <view >
         <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
       </view>
