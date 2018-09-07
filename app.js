@@ -36,8 +36,34 @@ App({
         }
       }
     })
+
+    //获取设备信息
+    this.getSys()
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    sysInfo: null,
+    windowW: null,
+    windowH: null
+  },
+  //获取手机信息
+  getSys: function () {
+    var that = this;
+    //  这里要非常注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)
+        //设置变量值
+        that.globalData.sysInfo = res;
+        that.globalData.windowW = res.windowWidth;
+        that.globalData.windowH = res.windowHeight;
+      }
+    })
   }
 })

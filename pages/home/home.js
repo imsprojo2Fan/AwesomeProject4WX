@@ -243,5 +243,16 @@ Page({
         })
       }
     })
+  },
+  toDetail: function (e) {
+    console.log(e)
+    var id = e.currentTarget.id
+    console.log(id)
+    var dType = e.currentTarget.dataset.type
+    console.log(dType)
+    //跳转页面
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id + "&type=" + dType
+    })
   }
 })

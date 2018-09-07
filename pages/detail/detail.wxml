@@ -6,7 +6,7 @@
       <view></view>
       <view></view>
     </view>
-    <view class="loaderTxt">加载数据中...</view>
+    <view class="loaderTxt">数据加载中...</view>
   </view>
 </view>
 <view class='wrap'>
@@ -24,11 +24,15 @@
     <view style='width:100%;height:28px;background:#6195FF;opacity:0.75;color:#fff;font-size:15px;line-height:28px;text-indent:15px;border-right:1px solid #6195FF;border-left:0px solid #6195FF;'>看风了风</view>
     <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>发行日期：{{publish}}</view>
     <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>播放时长：{{length}}</view>
-    <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>电影分类：{{dType}}</view>
+    <view style='margin-left:130px;font-size:13px;font-weight:normal;color:#10161A'>资源分类：{{dType}}</view>
     <view style='font-size:13px;font-weight:normal;color:#868F9B;color:#10161A;padding-left:130px'>剧情简介：</view>
     <view style='margin-left:8px;font-size:13px;font-weight:normal;color:#868F9B;padding-left:0px;padding-right:8px;text-indent:15px;'>{{description}}</view>
   </view>
 
+</view>
+
+<view class='wrap padding' style='display:none'>
+    <video id="myVideo" style='width:100%' src="https://v8.yongjiu8.com/20170822/INwk07IP/index.m3u8" binderror="videoErrorCallback" ></video>
 </view>
 
 <view class='wrap' hidden='{{isOn}}'>

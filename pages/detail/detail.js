@@ -96,6 +96,10 @@ Page({
 
   },
   requestData: function (dataType, id) {
+    that.setData({
+      isDisplay: 'block',
+      isHide: true
+    })
     wx.request({
       url: formalUrl,
       data: {
@@ -445,7 +449,7 @@ Page({
               var data = res.data.data
               if (res.data.code == 1) {
                 wx.showModal({
-                  title: '提示',
+                  title: '提交成功',
                   content: '小哥哥将尽快处理问题呢 /比❤',
                   showCancel: false,
                   success: function (res) {

@@ -1,2 +1,39 @@
 <!--search.wxml-->
-<text>search.wxml</text>
+<view id="loading" class="loading-wrap" style='display:{{isDisplay}}'>
+  <view class="loader">
+    <view class="la-fire la-3x" style='color:#6195FF'>
+      <view></view>
+      <view></view>
+      <view></view>
+    </view>
+    <view class="loaderTxt">数据加载中...</view>
+  </view>
+</view>
+<view class="search-hd">
+    <view class="search-area">
+        <form bindsubmit="search">
+            <view class="search-type" bindtap="changeSearchType">{{searchType}}</view>
+            <input class="search-txt" name="keyword" placeholder="请输入资源关键字、导演、类型等"/>
+            <button class="search-btn" formType="submit">搜索</button>
+        </form>
+    </view>
+    <view class="search-keyword">
+        <view class="search-keyword-title">热门搜索</view>
+        <view wx:for="{{hotItems}}" hover-class='shadow01' bindtap='toDetail' wx:for-item="hotKeywordItem" wx:key="hotKeywordItem" class="search-keyword-item" data-type='{{hotKeywordItem.type}}' hover-class='shadow01' data-id="{{hotKeywordItem.id}}" >{{hotKeywordItem.name}}</view>
+        <view class="search-keyword-title">热门标签</view>
+        <view wx:for="{{hotTagItems}}" wx:for-item="hotTagItem" wx:key="hotTagItem" class="search-keyword-item" data-keyword="{{hotTagItem}}" bindtap="searchByTag">{{hotTagItem}}</view>
+        <view class="search-keyword-title">猜您喜欢</view>
+        <swiper
+          indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+          interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+          <block wx:for="{{imgUrls}}" wx:for-item="item" wx:key="*this">
+            <swiper-item style="margin-left:3%;margin-top:3%">
+              <image bindtap='toDetail' hover-class='shadow02' src="{{item.item01.imgSrc2}}" data-id="{{item.item01.id}}" data-type="{{item.item01.type}}"  class='img' />
+              <image bindtap='toDetail' hover-class='shadow02' src="{{item.item02.imgSrc2}}" data-id="{{item.item02.id}}" data-type="{{item.item02.type}}" class='img' />
+              <image bindtap='toDetail' hover-class='shadow02' src="{{item.item03.imgSrc2}}" data-id="{{item.item03.id}}" data-type="{{item.item03.type}}" class='img' />
+            </swiper-item>
+          </block>
+        </swiper>
+    </view>
+
+</view>

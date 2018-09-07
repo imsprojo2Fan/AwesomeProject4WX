@@ -2,12 +2,12 @@
 var app
 var that
 var testUrl = 'http://localhost:7080/wx/resource/list'
-var formalUrl = 'https://wx.zooori.cn/wx/resource/list'
+var formalUrl = 'https://wx.zooori.cn/wx/resource/list4search'
 var refreshUrl = 'https://wx.zooori.cn/wx/resource/list4refresh'
 var isInit4series = true
 var isInit4varity = true
 var isInit4animate = true
-var gType
+var gType,key;
 var pageNow = 1
 var totalPage = 0
 var gData = []
@@ -27,10 +27,10 @@ Page({
     //初始化数据list
     list: [],  //将list的数据传到前台wxml页面中
     hidden: true,
-    isHide:true,
+    isHide: true,
     loadingHidden: false,
     tabScrollTop: 0,
-    isDisplay:'block'
+    isDisplay: 'block'
   },
 
   /**
@@ -42,23 +42,9 @@ Page({
     gData = []
     pageNow = 1
     lastId = 0
-    //请求电影列表
-    console.log(options.type)
-    gType = options.type
-    var title
-    if (gType==1){
-      title = "电影列表"
-    } else if (gType==2){
-      title = "电视剧列表"
-    } else if (gType == 3){
-      title = "综艺列表"
-    }else{
-      title = "动漫列表"
-    }
-    wx.setNavigationBarTitle({
-      title: title
-    })
-    this.requestData(gType,pageNow);
+    //查询资源列表
+    key = options.key;
+    this.requestData(pageNow,key);
   },
 
   /**
@@ -98,17 +84,17 @@ Page({
       url: refreshUrl,
       data: {
         id: lastId,
-        type:gType
+        type: gType
       },
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       //header: { 'content-type': 'application/json' },// 默认值
       success: function (res) {
         var data = res.data.data
-        if (data.length == 0 ) {
+        if (data.length == 0) {
           wx.hideNavigationBarLoading() //完成停止加载
           wx.stopPullDownRefresh() //停止下拉刷新
           return
-        } 
+        }
         gData = data.concat(gData)
         that.setData({
           list: gData,//将表中查询出来的信息传给list
@@ -125,7 +111,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(pageNow>totalPage){
+    if (pageNow > totalPage) {
       return
     }
     this.setData({
@@ -133,7 +119,7 @@ Page({
     })
     console.log(totalPage)
     pageNow++
-    this.requestData(gType,pageNow);
+    this.requestData(pageNow,key);
   },
 
   /**
@@ -142,26 +128,26 @@ Page({
   onShareAppMessage: function () {
 
   },
-  requestData: function (dataType,pageNow) {
+  requestData: function (pageNow,key) {
     wx.request({
       url: formalUrl,
       data: {
-        'pageNow': pageNow,
-        'pageSize': app.data.pageSize,
-        'type': dataType
+        pageNow: pageNow,
+        pageSize: app.data.pageSize,
+        key:key
       },
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       //header: { 'content-type': 'application/json' },// 默认值
       success: function (res) {
         var data = res.data.data
-        if(data.length==0&&pageNow==1){
+        if (data.length == 0 && pageNow == 1) {
           that.setData({
             hidden: false
           })
           that.setData({
             tip: "暂无数据"
           })
-        } else if (data.length == 0){
+        } else if (data.length == 0) {
           that.setData({
             hidden: false
           })
@@ -169,7 +155,7 @@ Page({
             tip: "没有更多了"
           })
         }
-        if(pageNow==1){
+        if (pageNow == 1) {
           lastId = data[0].id//用于刷新数据
         }
         gData = gData.concat(data)
@@ -223,15 +209,13 @@ Page({
       })
     }
   },
-  toDetail:function(e){
+  toDetail: function (e) {
     var id = e.currentTarget.id
-    console.log(id)
     var dType = e.currentTarget.dataset.type
-    console.log(dType)
     //跳转页面
     wx.navigateTo({
-      url: '../detail/detail?id=' + id+"&type="+dType
+      url: '../detail/detail?id=' + id + "&type=" + dType
     })
   }
- 
+
 })

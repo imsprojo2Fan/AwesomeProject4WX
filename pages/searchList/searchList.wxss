@@ -1,0 +1,55 @@
+@import "../../comm/style/loading.wxss";
+scroll-view{
+  height: 100%;
+  width: 100%;
+}
+
+.item{
+  width:100%;text-align:center;margin-top:15rpx;font-size: 13px;
+}
+.title{
+  font-size: 23px;
+}
+
+.line{
+  width:75px;height:3px;background:#6195FF;margin:6px auto;
+}
+
+.filmItem{
+  margin: 0 auto;
+  width: 75%;
+  padding: 25rpx 0;
+  border-radius: 3rpx;
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+  animation: fadeIn 1s;
+}
+
+.film-title{
+  padding: 16rpx;
+  width: auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border:0px solid #6195FF;
+}
+
+.top{
+  width: 35px;
+  height: 35px;
+  position: fixed;
+  right: 12px;
+  bottom: 8vh;
+  z-index: 1;
+  background-color: #6195FF;
+  color: #fff;
+  font-size:13px;
+  text-align: center;
+  line-height: 35px;
+}
+
+.shadow{
+  background: #999999;
+  opacity: 0.75;
+}
+

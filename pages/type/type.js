@@ -1,4 +1,5 @@
 // type.js
+var app;
 Page({
 
   /**
@@ -17,7 +18,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app = getApp();
+    var height = app.globalData.windowH
+    this.setData({
+      height: height
+    })
 
+    this.setData({
+      lineHeight: height / 2 + 'px'
+    })
   },
 
   /**
@@ -31,15 +40,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var height = wx.getSystemInfoSync().windowHeight
-    this.setData({
-      height: height
-    })
-
-    this.setData({
-      lineHeight: height / 2 + 'px'
-    })
-
+  
   },
 
   /**

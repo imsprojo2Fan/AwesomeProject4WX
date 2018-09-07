@@ -1,0 +1,6 @@
+{
+  "enablePullDownRefresh": false,
+  "onReachBottom": true,
+  "navigationBarTitleText": "查询列表",
+  "disableScroll": false
+}

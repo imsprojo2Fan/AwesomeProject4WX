@@ -6,7 +6,7 @@
       <view></view>
       <view></view>
     </view>
-    <view class="loaderTxt">加载数据中...</view>
+    <view class="loaderTxt">数据加载中...</view>
   </view>
 </view>
 
@@ -28,7 +28,7 @@
       <view class='title'>电影</view>
       <view class='line'></view>
       <view class="" wx:for="{{list4movie}}" wx:key=""> 
-        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' hover-class='shadow'>
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}" hover-class='shadow'>
             <view >
                 <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
             </view>
@@ -43,7 +43,7 @@
       <view class='title'>电视剧</view>
       <view class='line'></view>
       <view class="" wx:for="{{list4series}}" wx:key=""> 
-        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' hover-class='shadow'>
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}" hover-class='shadow'>
             <view >
                 <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
             </view>
@@ -58,7 +58,7 @@
       <view class='title'>综艺</view>
       <view class='line'></view>
       <view class="" wx:for="{{list4varity}}" wx:key=""> 
-        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' hover-class='shadow'>
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}" hover-class='shadow'>
             <view >
                 <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
             </view>
@@ -73,7 +73,7 @@
       <view class='title'>动漫</view>
       <view class='line'></view>
       <view class="" wx:for="{{list4animate}}" wx:key=""> 
-        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' hover-class='shadow'>
+        <view class='filmItem' bindtap='toDetail' id='{{item.id}}' data-type="{{item.type}}" hover-class='shadow'>
             <view >
                 <image style='width:75%;height:275px' src="{{item.imgSrc2}}"></image>
             </view>
