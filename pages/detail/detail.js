@@ -6,8 +6,13 @@ var formalUrl = 'https://wx.zooori.cn/wx/resource/list4item'
 var commentUrl = 'https://wx.zooori.cn/wx/comment/list'
 var commentAddUrl = 'https://wx.zooori.cn/wx/comment/add'
 var nickName,email,content;
+var GlobalItem;
+var GlobalArr = [];
 var GlobalId = 0;
 var GlobalName;
+var m3u8;
+var isSeries = false;
+var GlobalIndex  =0;//全局当前播放集数
 Page({
 
   /**
@@ -31,7 +36,16 @@ Page({
     comments:0,
     commensArr:[],
     val:"",
-    hideTip:true
+    hideTip:true,
+    showVideo:true,
+    m3u8Url:"https://v8.yongjiu8.com/20170822/INwk07IP/index.m3u8",
+    hideInfo:false,
+    showPlayBtn:false,
+    toBack:true,
+    videoTip:true,
+    bdUrlWrap:true,
+    password:"",
+    bdUrl:""
   },
 
   /**
@@ -40,10 +54,21 @@ Page({
   onLoad: function (options) {
     app = getApp()
     that = this
-    var id = options.id
+    var id = 0;
+    var dType = 0;
+    console.log(options);
+    if (!options){
+      var options_ = wx.getStorageSync('options');
+      id = options_.id;
+      dType = options_.type;
+    }else{
+      id = options.id;
+      dType = options.type;
+      wx.setStorageSync("options", options)
+    }
     GlobalId = id;
     nickName = "" ;email = ""; content="";    
-    var dType = options.type
+  
     this.requestData(dType,id)
   },
 
@@ -51,7 +76,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.videoContext = wx.createVideoContext('myVideo');
   },
 
   /**
@@ -79,7 +104,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    if (getCurrentPages().length != 0) {
+      //刷新当前页面的数据
+      getCurrentPages()[getCurrentPages().length - 1].onLoad()
+    }
   },
 
   /**
@@ -109,9 +137,11 @@ Page({
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       //header: { 'content-type': 'application/json' },// 默认值
       success: function (res) {
-        var data = res.data.data
+        var data = res.data.data;
+        GlobalArr = data;
         //单剧集处理
-        var obj = data[0]
+        var obj = data[0];
+        GlobalItem = obj;
           /*设置title*/
           wx.setNavigationBarTitle({
             title: obj.name
@@ -152,23 +182,26 @@ Page({
             isOn:flag
           })
         if (data.length>1){//多剧集处理
-        for(var i=0;i<data.length;i++){
-          var sequence = data[i].sequence
-          if (sequence<10){
-            sequence = "0" + sequence;
+          isSeries = true;
+          for(var i=0;i<data.length;i++){
+            var sequence = data[i].sequence
+            if (sequence<10){
+              sequence = "0" + sequence;
+            }
+            data[i].sequence = sequence;
           }
-          data[i].sequence = sequence;
-        }
-          that.setData({
-            isSeriesOn:false,
-            series:data
-          })
+            that.setData({
+              isSeriesOn:false,
+              series:data,
+              showPlayPic:false//隐藏播放图片
+            })
         }
       },
       fail: function () {
 
       },
       complete: function () {
+        wx.stopPullDownRefresh();
         that.setData({
           isDisplay: 'none',
           isHide:false
@@ -187,31 +220,124 @@ Page({
       })
     }else{
       that.setData({
-        playImg: "../../dist/images/play.png"
+        playImg: "../../dist/images/play.png",
       })
+      that.toPlay();
     }
   },
   toPlay:function(e){
-    var dType = e.type;
-    if (dType == "touchstart") {
+
+    that.setData({
+      isDisplay: 'block',
+      isHide: false
+    })
+
+    that.setData({
+      //m3u8Url: GlobalItem.m3u8,
+      m3u8Url:"https://v8.yongjiu8.com/20170822/INwk07IP/index.m3u8",
+      hideInfo: true,//隐藏资源信息
+      showPlayPic: true,//隐藏播放图片，
+      showPlayBtn: true,
+      toBack: false
+    })
+
+    if (!isSeries){//播放单集
+      if (!GlobalItem.m3u8 || GlobalItem.m3u8 == "无资源链接") {//无资源链接提示
+        that.setData({
+          videoTip: false
+        })
+      } else {//播放
+        that.setData({
+          showVideo: false,
+          m3u8Url: GlobalItem.m3u8
+        })
+        that.videoContext.play();
+      }
+    }else{//多剧集
+
+      if (e){
+        GlobalIndex = e.currentTarget.dataset.index;
+        if(!GlobalIndex){
+          GlobalIndex = 0;
+        }
+      }
+
+      //设置选中样式
+      for(var i=0;i<GlobalArr.length;i++){
+        that.setData({
+            Index: GlobalIndex
+        })
+
+      }
       that.setData({
-        blue: "#fff"
+        series:GlobalArr
       })
-    } else {
-      that.setData({
-        blue: "#6195FF"
-      })
+
+      var obj = GlobalArr[GlobalIndex];
+      if (!obj.m3u8 || obj.m3u8 == "无资源链接") {//无资源链接提示
+        that.setData({
+          videoTip: false
+        })
+      } else {//播放
+        that.setData({
+          showVideo: false,
+          m3u8Url: obj.m3u8
+        })
+        that.videoContext.play();
+      }
     }
+    // 本地存储观看记录-------------开始
+    if (GlobalItem) {
+      var historys = wx.getStorageSync('historys') || []
+      if (historys.length > 500) {
+        historys = []
+      }
+      if(isSeries){
+        var sIndex = GlobalIndex+1;
+        GlobalItem.order = GlobalItem.name + "[" + sIndex+"]";
+      }
+      GlobalItem.viewTime = that.format();
+      historys.unshift(GlobalItem)
+      wx.setStorageSync('historys', historys)
+    }
+    // 本地存储观看记录-------------结束
+
+    that.setData({
+      isDisplay: 'none',
+      isHide: false
+    })
+    
+  },
+  toBack:function(){
+    that.setData({
+      showVideo: true,
+      hideInfo: false,//隐藏资源信息
+      showPlayPic: false,//隐藏播放图片
+      showPlayBtn: false,
+      toBack: true,
+      videoTip:true,
+      Index:-1
+    })
+    that.videoContext.pause();
   },
   toBdCloud: function (e) {
-    var dType = e.type;
-    if (dType == "touchstart") {
-      that.setData({
-        blue:"#fff"
+    if (!GlobalItem.bdUrl || GlobalItem.bdUrl=="无资源链接"){
+      wx.showModal({
+        title: '资源提示',
+        content: '暂无网盘资源分享链接',
+        showCancel:false
       })
-    } else {
+    }else{
+      var bdUrl = GlobalItem.bdUrl;
+      bdUrl = bdUrl.substring(3, bdUrl.length);
+      bdUrl = bdUrl.replace("：", ":");
+      var bdArr = bdUrl.split("密码:");
+      var pass = bdArr[1];
+      var url = bdArr[0];
       that.setData({
-        blue: "#6195FF"
+        bdUrlWrap:false,
+        password:pass,
+        bdUrl:url
       })
     }
   },
@@ -473,5 +599,22 @@ Page({
         }
       }
     })
+  },
+  format:function(){
+    var date = new Date();
+    var year = date.getFullYear(),
+      month = date.getMonth() + 1,//月份是从0开始的
+      day = date.getDate(),
+      hour = date.getHours(),
+      min = date.getMinutes(),
+      sec = date.getSeconds();
+    var newTime = year + '-' +
+      (month < 10 ? '0' + month : month) + '-' +
+      (day < 10 ? '0' + day : day) + ' ' +
+      (hour < 10 ? '0' + hour : hour) + ':' +
+      (min < 10 ? '0' + min : min) + ':' +
+      (sec < 10 ? '0' + sec : sec);
+
+    return newTime;         
   }
 })

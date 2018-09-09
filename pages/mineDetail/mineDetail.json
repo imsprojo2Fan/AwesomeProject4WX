@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": false,
-  "onReachBottom": false,
+  "onReachBottom": true,
   "navigationBarTitleText": "看风了风",
   "disableScroll": false
 }

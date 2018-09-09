@@ -1,0 +1,42 @@
+<!--pages/mineDetail/mineDetail.wxml-->
+<view class='wrap' >
+  <view style='height:10px;'></view>
+  <view hidden='{{hideHistorys}}' >
+    <view  wx:for="{{historys}}" hover-class='shadow' bindtap='toDetail' wx:for-item="item" wx:key="key01" class="item" data-type='{{item.type}}' data-id="{{item.id}}" >
+      <view style='font-size:13px;color:#555;'>{{item.name}}{{item.order}}</view>
+      <view style='font-size:11px;color:#999999;'>{{item.viewTime}}</view>
+      <image class="icon" src='../../dist/images/cc-right.png'></image>
+    </view>
+    <view style='font-size:13px;width:100%;padding:8px 0px;text-align:center;color:#bfbfbf'>{{tip}}</view>
+  </view>
+
+  <view hidden='{{wishes}}' >
+    <view class='wrapWishes'>
+       <input data-type="nickName" value="{{val}}" maxlength="20" bindinput="inputVal" class="input" type="text" placeholder="昵称"/>
+      <input data-type="email" value="{{val}}" maxlength="30" class="input" bindinput="inputVal" type="text" placeholder="邮箱"/>
+      <textarea hidden='{{isHide}}' value="{{val}}" data-type="content" bindinput="inputVal" placeholder="一些描述"></textarea>
+      <view style='width:100%;text-align:center;'>
+        <view class='tag' style='margin:15px auto;padding-left:25px;padding-right:25px;' bindtap='submit' hover-class='shadow2'>提交</view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden='{{feedback}}' >
+    <view class='wrapWishes'>
+      <input data-type="email" value="{{val}}" maxlength="30" class="input" bindinput="inputVal" type="text" placeholder="邮箱"/>
+      <textarea hidden='{{isHide}}' value="{{val}}" data-type="content" bindinput="inputVal" placeholder="一些建议"></textarea>
+      <view style='width:100%;text-align:center;'>
+        <view class='tag' style='margin:15px auto;padding-left:25px;padding-right:25px;' bindtap='advise' hover-class='shadow2'>提交</view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden='{{qrcode}}' >
+    <view class='wrap4code'>
+     <image src='{{qrcodeUrl}}' bindtap="previewImage" style='width:155px;height:155px;margin-top:8%;padding-bottom:5%;'></image>
+     <view style='color:#10161A;'>扫码分享</view>
+    </view>
+  </view>
+
+  
+</view>

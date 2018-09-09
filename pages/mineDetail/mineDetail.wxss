@@ -1,20 +1,36 @@
-/* pages/detail.wxss */
+/* pages/mineDetail/mineDetail.wxss */
 @import "../../comm/style/loading.wxss";
+
 .wrap{
-  margin:10px;border:1px solid #eee;
+  border: 0px solid #eee;
+  background: #ECECEC
 }
 
-.padding{
-  padding: 8px;
+.item{
+  background: #fff;
+  border-bottom:0.5px solid #bfbfbf;
+  margin-left:10px;
+  margin-right:10px;
+  padding-left: 10px;
+  padding-top:8px;
+  padding-bottom:8px;
 }
 
-.play{
-  width:95px;
-  height:95px;
-  position:absolute;
-  z-index:99;
-  top:58px;
-  left:26px;
+.icon{
+  width:35px;height:35px;float:right;margin-top:7px;margin-right:0px;
+  margin-top:-38px;
+}
+
+.shadow{
+  background: #999999;
+  opacity: 0.75;
+}
+
+.wrapWishes{
+  margin:10px;
+  background:#fff;
+  padding:8px;
+  border-radius: 3px;
 }
 
 .tag{
@@ -24,35 +40,9 @@
     margin: 2px 0px;
     background: #F4F4F4;
     color: #10161A;
-     border-radius: 3px;
+    border-radius: 3px;
 }
 
-.series{
-    width:25px;
-    height:25px; 
-    display: inline-block;
-    text-align: center;
-    padding: 6px 8px;
-    font-size: 14px;
-    margin: 2px 0px;
-    background: #F4F4F4;
-    color: #10161A;
-    border-radius: 0px;
-    margin-right: 5px;
-    line-height: 25px;
-}
-
-.shadow{
-  background-color: #6195FF;
-  color:#fff;
-  opacity: 0.75;
-}
-
-.shadow2{
-  background-color: #6195FF;
-  color:#fff;
-  opacity: 0.75;
-}
 input{
     height: 40px;
     width: 92%;
@@ -60,7 +50,7 @@ input{
     border-radius: 3px;
     font-size: 13px;
     background: #F4F4F4;
-    border-bottom: 2px solid #EEE;
+    border-bottom: 3px solid #EEE;
     color: #354052;
     padding: 0px 10px;
     opacity: 0.75;
@@ -79,14 +69,24 @@ textarea{
     margin-top: 10px;
     font-size: 13px;
     background: #F4F4F4;
-    border-bottom: 2px solid #EEE;
+    border-bottom: 3px solid #EEE;
     color: #354052;
     opacity: 0.75;
     -webkit-transition: 0.2s border-color, 0.2s opacity;
     transition: 0.2s border-color, 0.2s opacity;
 }
 
-.checked{
+.shadow2{
   background: #6195FF;
   color:#fff;
+}
+
+.wrap4code{
+  height:275px;
+  margin-left:2%;
+  margin-right:2%;
+  text-align: center;
+  background:#fff;
+  padding:8px;
+  border-radius: 3px;
 }

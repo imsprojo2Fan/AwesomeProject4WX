@@ -9,9 +9,9 @@
     <view class="loaderTxt">数据加载中...</view>
   </view>
 </view>
-<view class='wrap'>
+<view class='wrap' hidden='{{hideInfo}}'>
 
-  <view hidden='{{isOn}}' style='position:absolute;z-index:99;top:53px;left:26px;' >
+  <view hidden='{{showPlayPic}}' style='position:absolute;z-index:99;top:53px;left:26px;' >
     <image mode='aspectFit' bindtouchstart='changeImg' bindtouchend='changeImg' style='width:95px;height:95px;' src='{{playImg}}'></image>
   </view>
   <view >
@@ -31,13 +31,27 @@
 
 </view>
 
-<view class='wrap padding' style='display:none'>
-    <video id="myVideo" style='width:100%' src="https://v8.yongjiu8.com/20170822/INwk07IP/index.m3u8" binderror="videoErrorCallback" ></video>
+<view class='wrap padding' hidden='{{showVideo}}' >
+    <video id="myVideo" style='width:100%' src="{{m3u8Url}}" binderror="videoErrorCallback" ></video>
+</view>
+
+<view class='wrap padding ' hidden='{{videoTip}}' >
+    <view  style="width:355px;height:155px;text-align:center;">
+			<view style="color: #6195FF;margin-left:147px;margin-top:25px;" class="la-square-loader la-2x">
+				<view></view>
+			</view>
+			<view style="text-align: center;margin-left:0px;" class="loaderTxt">小程序暂无资源</view>
+      <view style="text-align: center;margin-top:-3px;margin-left:0px;" class="loaderTxt">可前往电脑/百度网盘观看</view>
+      <!--
+      <view style="text-align: center;margin-top:0px;color:#6195FF;margin-left:0px;" class="loaderTxt">http://awesome.zooori.cn</view>
+      -->
+		</view>
 </view>
 
 <view class='wrap' hidden='{{isOn}}'>
   <view style='margin:12px 8px;text-align:center'>
-    <view class='tag' style='margin-right:0px;' bindtap='toPlay' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-play-circle'/>在线观看</view>
+    <view class='tag' hidden='{{showPlayBtn}}' style='margin-right:0px;' bindtap='toPlay' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-play-circle'/>在线观看</view>
+    <view class='tag' style='margin-right:0px;' hidden='{{toBack}}' bindtap='toBack' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-angle-double-left'/>返回详情</view>
     <view class='tag' style='margin-left: 8px;' bindtap='toBdCloud' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-cloud-download'/>百度网盘</view>
     <view  class='tag' style='margin-left: 8px' bindtap='toResponse' hover-class='shadow2'><text style='margin-right:3px;' class='fa fa-bug'/>反馈问题</view>
   </view>
@@ -45,7 +59,21 @@
 
 <view class='wrap' hidden='{{isSeriesOn}}' >
   <view style='margin:8px;text-align:center;'>
-     <view class="series" wx:for="{{series}}" hover-class='shadow' wx:key="i" bindtap='toPlay' id='{{item.id}}' data-sid="{{item.sid}}" data-type="{{item.phoneSrc}}">{{item.sequence}}</view>
+     <view class="series {{index==Index?'checked':'normal'}}" wx:for="{{series}}" data-index="{{index}}" hover-class='shadow' wx:key="i" bindtap='toPlay' id='{{item.id}}' data-sid="{{item.sid}}" data-type="{{item.phoneSrc}}">{{item.sequence}}</view>
+  </view>
+</view>
+
+<view class='wrap padding' hidden='{{bdUrlWrap}}'>
+  <view style='font-size:18px;color:#10161A;font-weight:bold;'>网盘链接</view>
+  <view style='height:3px;width:35px;background:#6195FF'></view>
+  <view style='display:flex;'>
+    <text style="font-size:15px;width:40px;margin-top:18px;">密码:</text>
+    <input value="{{password}}" style='width:45px;text-align:center;' class="input" type="text" placeholder="密码"/>
+  </view>
+
+  <view style='display:flex;'>
+    <text style="font-size:15px;width:40px;margin-top:18px;">链接:</text>
+    <input value="{{bdUrl}}" style='width:270px;'  class="input" type="text" placeholder="链接"/>
   </view>
 </view>
 

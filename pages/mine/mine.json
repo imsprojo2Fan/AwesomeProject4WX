@@ -1,1 +1,5 @@
-{}
+{"enablePullDownRefresh": false,
+  "onReachBottom": false,
+  "navigationBarTitleText": "看风了风",
+  "disableScroll": true
+}

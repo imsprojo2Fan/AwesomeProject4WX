@@ -80,11 +80,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.showToast({
-      title: '想看些什么呢？',
-      icon: 'none',
-      duration: 1000
-    })
+    if (getCurrentPages().length != 0) {
+      //刷新当前页面的数据
+      getCurrentPages()[getCurrentPages().length - 1].onLoad()
+    }
   },
 
   /**
@@ -153,18 +152,6 @@ Page({
   toDetail:function(e){
     console.log(e);
   },
-
-  getUserInfoFun: function () {
-    var S = this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res.userInfo);
-        //do anything
-      },
-      fail: S.showPrePage
-    })
-  },
-
   queryMultipleNodes: function (id) {
     //创建节点选择器
     var query = wx.createSelectorQuery();
@@ -201,6 +188,10 @@ Page({
 
 
   requestData:function(dataType){
+
+    that.setData({
+      loadingHidden: false
+    })
     wx.request({
       url: formalUrl,
       data: {
@@ -238,6 +229,7 @@ Page({
 
       },
       complete: function () {
+        wx.stopPullDownRefresh();
         that.setData({
           loadingHidden:true
         })

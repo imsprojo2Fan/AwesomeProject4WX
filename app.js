@@ -1,5 +1,14 @@
 //app.js
 App({
+  globalData: {
+    userInfo: null,
+    code:"",
+    sysInfo: null,
+    windowW: null,
+    windowH: null,
+    appid: 'wx1caae3ad88613569',//appid需自己提供，此处的appid我随机编写
+    secret: '395dafc12190fe7b80efbfbc0260a557',//secret需自己提供，此处的secret我随机编写
+  },
   data:{
     pageNow:1,
     pageSize:12
@@ -14,6 +23,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        this.globalData.code = res.code
       }
     })
     // 获取用户信息
@@ -36,15 +46,9 @@ App({
         }
       }
     })
-
     //获取设备信息
     this.getSys()
-  },
-  globalData: {
-    userInfo: null,
-    sysInfo: null,
-    windowW: null,
-    windowH: null
+
   },
   //获取手机信息
   getSys: function () {

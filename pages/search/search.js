@@ -92,7 +92,6 @@ Page({
         }
       }
     })
-
   },
   search: function (e) {
     var that = this

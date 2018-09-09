@@ -1,1 +1,72 @@
 /* mine.wxss */
+@import "../../comm/style/loading.wxss";
+
+button::after{ border: none; }
+
+.btn{
+  margin-top:5px;height:35px;width:115px;border-radius:3px;font-size:13px;
+  border-color:#fff;
+}
+
+.userinfo-nickname {
+  color: #fff;
+}
+.wrap{
+  background-color:#ECECEC;
+}
+
+.wrap2{
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: #6195FF;
+  height:34vh;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.avatar{
+  width:86px;
+  height:86px;
+  margin-top:6vh;
+  border-radius: 50%;
+}
+
+.wrap3{
+  background: #fff;
+  margin-left:10px;
+  margin-right: 10px;
+}
+
+.wrapCol{
+  padding-left:10px;
+  padding-right:10px;
+  height:50px;
+  background: #fff;
+  line-height:50px;
+  color:#555;
+  font-size: 15px;
+}
+
+.line{
+  border-bottom: 0.5px solid #bfbfbf;
+  width: 94%;
+  margin-left: 3%;
+}
+
+.wrap4{
+  margin-left:10px;
+  margin-right:10px;
+  height:50px;
+  background: #fff;
+  margin-top:8px;
+}
+
+.shadow{
+  background: #999999;
+  opacity:0.75;
+}
+
+.icon{
+  width:35px;height:35px;float:right;margin-top:7px;margin-right:-10px;
+}

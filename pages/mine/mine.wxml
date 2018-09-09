@@ -1,2 +1,39 @@
 <!--mine.wxml-->
-<text>mine.wxml</text>
+<view class='wrap' style="height:{{height}}px">
+  <view style='height:10px;background-color:#ECECEC;'></view>
+  <view class='wrap2'>
+    <image mode='aspectFit' class='avatar' src='{{avatarUrl}}'></image>
+     <view >
+        <button class='btn' hidden='{{hideBtn}}' open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        授权登录</button>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+  </view>
+
+  <view class='wrap3'>
+    <view class='wrapCol' hover-class='shadow' bindtap='toDetail' data-type="1">
+      <view style='float:left'><text class='fa fa-history' style='margin-right:5px;'></text>观看记录</view>
+      <image class='icon' src='../../dist/images/cc-right.png'></image>
+    </view>
+    <view class='line'></view>
+
+    <view class='wrapCol' hover-class='shadow' bindtap='toDetail' data-type="2">
+      <view style='float:left'><text class='fa fa-send-o' style='margin-right:5px;'></text>留言求片</view>
+      <image class='icon' src='../../dist/images/cc-right.png'></image>
+    </view>
+    <view class='line'></view>
+
+    <view class='wrapCol' hover-class='shadow' bindtap='toDetail' data-type="3">
+      <view style='float:left'><text class='fa fa-feed' style='margin-right:5px;'></text>建议反馈</view>
+      <image class='icon' src='../../dist/images/cc-right.png'></image>
+    </view>
+  </view>
+
+  <view class='wrap4'>
+    <view class='wrapCol' style='border-bottom-left-radius:3px;border-bottom-right-radius:3px;' hover-class='shadow' bindtap='toDetail' data-type="4">
+      <view style='float:left'><text class='fa fa-share-alt' style='margin-right:5px;'></text>分享链接</view>
+      <image class='icon' src='../../dist/images/cc-right.png'></image>
+    </view>
+  </view>
+
+</view>
