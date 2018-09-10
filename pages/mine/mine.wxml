@@ -12,13 +12,13 @@
 
   <view class='wrap3'>
     <view class='wrapCol' hover-class='shadow' bindtap='toDetail' data-type="1">
-      <view style='float:left'><text class='fa fa-history' style='margin-right:5px;'></text>观看记录</view>
+      <view style='float:left'><text class='fa fa-history' style='margin-right:5px;'></text>查看记录</view>
       <image class='icon' src='../../dist/images/cc-right.png'></image>
     </view>
     <view class='line'></view>
 
     <view class='wrapCol' hover-class='shadow' bindtap='toDetail' data-type="2">
-      <view style='float:left'><text class='fa fa-send-o' style='margin-right:5px;'></text>留言求片</view>
+      <view style='float:left'><text class='fa fa-send-o' style='margin-right:5px;'></text>一些留言</view>
       <image class='icon' src='../../dist/images/cc-right.png'></image>
     </view>
     <view class='line'></view>

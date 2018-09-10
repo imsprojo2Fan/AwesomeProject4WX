@@ -3,7 +3,7 @@
 
 .wrap{
   border: 0px solid #eee;
-  background: #ECECEC
+  background: #fff
 }
 
 .item{
@@ -89,4 +89,5 @@ textarea{
   background:#fff;
   padding:8px;
   border-radius: 3px;
+  margin-top:15%;
 }

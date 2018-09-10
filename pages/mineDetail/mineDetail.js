@@ -32,7 +32,7 @@ Page({
       this.setData({
         hideHistorys:false
       })
-      title = "观看记录"
+      title = "查看记录"
       historys = wx.getStorageSync('historys') || []
       if(historys.length>0){
         this.setData({
@@ -44,7 +44,7 @@ Page({
       }
       
     }else if(dType==2){
-      title = "留言求片"
+      title = "一些留言"
       this.setData({
         wishes:false
       });

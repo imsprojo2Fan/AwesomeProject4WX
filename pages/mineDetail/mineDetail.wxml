@@ -14,7 +14,7 @@
     <view class='wrapWishes'>
        <input data-type="nickName" value="{{val}}" maxlength="20" bindinput="inputVal" class="input" type="text" placeholder="昵称"/>
       <input data-type="email" value="{{val}}" maxlength="30" class="input" bindinput="inputVal" type="text" placeholder="邮箱"/>
-      <textarea hidden='{{isHide}}' value="{{val}}" data-type="content" bindinput="inputVal" placeholder="一些描述"></textarea>
+      <textarea hidden='{{isHide}}' value="{{val}}" data-type="content" bindinput="inputVal" placeholder="您想说的"></textarea>
       <view style='width:100%;text-align:center;'>
         <view class='tag' style='margin:15px auto;padding-left:25px;padding-right:25px;' bindtap='submit' hover-class='shadow2'>提交</view>
       </view>

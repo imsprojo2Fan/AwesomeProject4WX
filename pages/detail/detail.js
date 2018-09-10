@@ -179,7 +179,8 @@ Page({
             length:obj.length,
             description:description,
             dType:detailType,
-            isOn:flag
+            isOn:flag,
+            showPlayPic:flag
           })
         if (data.length>1){//多剧集处理
           isSeries = true;
@@ -190,10 +191,13 @@ Page({
             }
             data[i].sequence = sequence;
           }
+          if (isOn == 1) {
+            flag = false
+          }
             that.setData({
-              isSeriesOn:false,
+              isSeriesOn: flag,
               series:data,
-              showPlayPic:false//隐藏播放图片
+              showPlayPic: flag//隐藏播放图片
             })
         }
       },
